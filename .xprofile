@@ -1,0 +1,4 @@
+xset fp+ $HOME/.fonts/terminess-powerline
+
+SYSRESOURCES=/etc/X11/Xresources
+USERRESOURCES=$HOME/.Xresources

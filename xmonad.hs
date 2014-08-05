@@ -1,8 +1,11 @@
 import XMonad hiding (workspaces)
 import qualified XMonad as X (workspaces)
 import XMonad.Config.Gnome
+import XMonad.Hooks.ManageDocks
+import XMonad.Layout
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.IndependentScreens
+import XMonad.Layout.PerWorkspace
 import XMonad.Util.EZConfig
 
 import qualified Data.List as L
@@ -33,13 +36,34 @@ moveNScreensTo n
     | n <= 1 = onCurrentScreen view
     | otherwise = move2ScreensTo
 
+layouts nScreens = onWorkspaces vimWorkspaces vimOrder $
+                   onWorkspaces vertWorkspaces vertOrder $
+                   genOrder
+    where
+      allWorkspaces  = withScreens nScreens myWorkspaces
+      -- The first half the workspaces on screen 0 should start with vim splits.
+      vimWorkspaces  = take ((length myWorkspaces) `div` 2) [ ws | ws <- allWorkspaces, (unmarshallS ws) == 0 ]
+      -- All workspaces on screens >0 should assume vertical splits.
+      vertWorkspaces = [ ws | ws <- allWorkspaces, (unmarshallS ws) > 0 ]
+      vimOrder       = vim ||| Mirror vim ||| Full
+      genOrder       = even ||| Mirror even ||| Full
+      vertOrder      = Mirror even ||| even ||| Full
+      vim  = Tall nmaster delta vimratio
+      even = Tall nmaster delta evenratio
+      nmaster = 1
+      delta = 1/100
+      evenratio = 1/2
+      -- 54% of 2560 pixels with my vim setup is just a little more than 2
+      -- side-by-side 80-char splits.
+      vimratio = 54/100
+
 main = do
     nScreens <- countScreens
     xmonad $ gnomeConfig
      { modMask = mod4Mask
      , handleEventHook = fullscreenEventHook
      , manageHook = myManageHook <+> manageHook gnomeConfig <+> fullscreenManageHook
-     , layoutHook = fullscreenFull $ layoutHook gnomeConfig
+     , layoutHook = fullscreenFull $ avoidStruts $ layouts nScreens
      , terminal = "x-terminal-emulator"
      , X.workspaces = withScreens nScreens myWorkspaces
      } `additionalKeysP` (myKeys nScreens)

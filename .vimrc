@@ -31,7 +31,8 @@ Plugin 'Blackrush/vim-gocode'
 Plugin 'bling/vim-airline'
 call vundle#end()
 
-" Solarized dark is pretty
+" Solarized dark is pretty, but better without italics
+let g:solarized_italic = 0
 colorscheme solarized
 
 if filereadable(expand("~/google.vimrc"))

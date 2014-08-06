@@ -55,8 +55,8 @@ set hlsearch
 set number
 " Highlight matching parens, etc.
 set showmatch
-" Show INSERT/REPLACE/VISUAL.
-set showmode
+" Don't show INSERT/REPLACE/VISUAL since we have powerline.
+set showmode!
 " Change the window manager title.
 set title
 " Show a column at the 81st character. Note that DarkRed is actually quite
@@ -92,5 +92,8 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+" If we are using a GUI, use a good font.
+set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 
 filetype plugin indent on

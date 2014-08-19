@@ -24,8 +24,10 @@ Plugin 'bufexplorer.zip'
 " are at :help unimpaired.
 Plugin 'tpope/vim-unimpaired'
 
-" youcompleteme for golang.
-Plugin 'Blackrush/vim-gocode'
+" Awesome golang support
+Plugin 'fatih/vim-go'
+" Syntastic Go appengine setup.
+Plugin 'roktas/syntastic-more'
 
 " Improved statusline
 Plugin 'bling/vim-airline'
@@ -46,6 +48,10 @@ set background=dark
 set equalalways
 " Spaces are better than tabs.
 set expandtab
+" But let's not tab too far.
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 " Don't unload buffers when the window holding them is closed, so they can be
 " found with bufexplorer.
 set hidden
@@ -70,12 +76,6 @@ au BufEnter * silent! lcd %:p:h
 hi StatusLine ctermfg=Cyan
 " Remap escape to jk
 inoremap jk <Esc>
-
-" Go support.
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-" Real tabs are the style in Go, but only use 2 characters for them for
-" prettiness.
-autocmd BufEnter *.go silent! set shiftwidth=2 tabstop=2 softtabstop=2 noexpandtab
 
 " vim-airline setup
 " Use the smart tab line

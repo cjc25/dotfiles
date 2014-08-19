@@ -71,9 +71,6 @@ set colorcolumn=81
 hi ColorColumn ctermbg=DarkRed guibg=#592929
 " Change the directory for :o, :Ex, etc. to the current file's directory.
 au BufEnter * silent! lcd %:p:h
-" Highlight the window statusline in Cyan, which is actually quite understated
-" in solarized dark (light grey).
-hi StatusLine ctermfg=Cyan
 " Remap escape to jk
 inoremap jk <Esc>
 

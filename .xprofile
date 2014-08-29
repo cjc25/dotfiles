@@ -1,4 +1,10 @@
+# No directories under $HOME are on fp by default, so we need to add our
+# overrides here..
 xset fp+ $HOME/.fonts/terminess-powerline
 
-SYSRESOURCES=/etc/X11/Xresources
-USERRESOURCES=$HOME/.Xresources
+# Force my .Xresources file to be merged without -nocpp.
+USRRESOURCES=$HOME/.Xresources
+
+# Start xcompmgr if it's not already running, since otherwise chrome freaks out
+# on Ubuntu Trusty.
+xcompmgr &

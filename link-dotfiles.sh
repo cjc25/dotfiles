@@ -16,21 +16,9 @@ for filename in $(ls -A $HERE) ; do
   target="$targetdir/$filename"
   backup="${target}.old"
 
-  echo "Copying $target to $backup"
-  if [[ -e $backup ]]; then
-    echo -n "Overwrite $backup (Y/n)? "
-    read yesno
-    case ${yesno:0:1} in
-      n|N)
-        echo "Aborting backup and replacement"
-        continue
-        ;;
-    esac
-  fi
-  cp "$target" "$backup"
-
   while true ; do
-    echo -n "Create symlink over $target to $replacement (y/n/d[iff])? "
+    echo -n "Create symlink over $target to $replacement" \
+      "(backed up to $backup) (y/n/d[iff])? "
     read yesnodiff
     case ${yesnodiff:0:1} in
       d|D)
@@ -50,7 +38,12 @@ for filename in $(ls -A $HERE) ; do
         ;;
     esac
   done
-  rm "$target" && ln -s -T "$replacement" "$target"
+
+  cp "$target" "$backup"
+  mkdir -p "$targetdir"
+  rm "$target"
+  ln -s -T "$replacement" "$target"
+
   echo "Done with $filename!"
   echo
 done

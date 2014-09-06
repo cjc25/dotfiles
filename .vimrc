@@ -1,3 +1,5 @@
+let s:at_google = filereadable(expand("~/google.vimrc"))
+
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -31,13 +33,18 @@ Plugin 'roktas/syntastic-more'
 
 " Improved statusline
 Plugin 'bling/vim-airline'
+
+" Use Valloric/YouCompleteMe for speedy autocompletions.
+if !s:at_google
+  Plugin 'Valloric/YouCompleteMe'
+endif
 call vundle#end()
 
 " Solarized dark is pretty, but better without italics
 let g:solarized_italic = 0
 colorscheme solarized
 
-if filereadable(expand("~/google.vimrc"))
+if s:at_google
   source ~/google.vimrc
 endif
 

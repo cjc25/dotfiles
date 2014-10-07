@@ -8,3 +8,6 @@ USRRESOURCES=$HOME/.Xresources
 # Start compton if it's not already running, since otherwise chrome freaks out
 # on Ubuntu Trusty.
 compton -b
+
+# gnome-screensaver is annoying, lock with xscreensaver.
+xscreensaver -no-splash &

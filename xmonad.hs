@@ -7,6 +7,7 @@ import XMonad.Layout.Fullscreen
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.PerWorkspace
 import XMonad.Util.EZConfig
+import XMonad.Util.Run
 
 import qualified Data.List as L
 import XMonad.StackSet hiding (filter)
@@ -66,7 +67,7 @@ main = do
      , layoutHook = fullscreenFull $ avoidStruts $ layouts nScreens
      , terminal = "x-terminal-emulator"
      , X.workspaces = withScreens nScreens myWorkspaces
-     } `additionalKeysP` (myKeys nScreens)
+     } `additionalKeysP` (myKeys nScreens) `additionalKeysP` shortcutKeys
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 myKeys nScreens = [ (otherModMasks ++ "M-" ++ [key], windows $ action tag)
@@ -76,6 +77,8 @@ myKeys nScreens = [ (otherModMasks ++ "M-" ++ [key], windows $ action tag)
                                                  , ("C-", onCurrentScreen view)
                                                  ]
                   ]
+
+shortcutKeys = [ ("M-l", safeSpawn "xscreensaver-command" ["-lock"]) ]
 
 myManageHook = composeAll
         [ className =? "feh" --> doFloat

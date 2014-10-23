@@ -34,6 +34,10 @@ Plugin 'roktas/syntastic-more'
 " Improved statusline
 Plugin 'bling/vim-airline'
 
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
 " Use Valloric/YouCompleteMe for speedy autocompletions.
 if !s:at_google
   Plugin 'Valloric/YouCompleteMe'

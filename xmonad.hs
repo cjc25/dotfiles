@@ -1,3 +1,4 @@
+import Graphics.X11.Types
 import XMonad hiding (workspaces)
 import qualified XMonad as X (workspaces)
 import XMonad.Config.Gnome
@@ -67,7 +68,7 @@ main = do
      , layoutHook = fullscreenFull $ avoidStruts $ layouts nScreens
      , terminal = "x-terminal-emulator"
      , X.workspaces = withScreens nScreens myWorkspaces
-     } `additionalKeysP` (myKeys nScreens) `additionalKeysP` shortcutKeys
+     } `additionalKeysP` (myKeys nScreens) `additionalKeys` shortcutKeys
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 myKeys nScreens = [ (otherModMasks ++ "M-" ++ [key], windows $ action tag)
@@ -78,7 +79,9 @@ myKeys nScreens = [ (otherModMasks ++ "M-" ++ [key], windows $ action tag)
                                                  ]
                   ]
 
-shortcutKeys = [ ("M-l", safeSpawn "xscreensaver-command" ["-lock"]) ]
+shortcutKeys = [ ( (mod1Mask .|. controlMask, xK_l)
+                 , safeSpawn "xscreensaver-command" ["-lock"]
+               ) ]
 
 myManageHook = composeAll
         [ className =? "feh" --> doFloat

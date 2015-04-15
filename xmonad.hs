@@ -87,5 +87,7 @@ myManageHook = composeAll
         [ className =? "feh" --> doFloat
         -- The magic name for hangouts windows, maybe?
         , (className =? "Google-chrome" <||> className =? "Google-chrome-stable") <&&> appName =? "crx_nckgahadagoaajjgafhacjanaoiihapd" --> doFloat
+        -- Security Key SSH prompt should float.
+        , className =? "gnubby_ssh_prompt" --> doFloat
         ]
 

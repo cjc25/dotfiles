@@ -32,7 +32,8 @@ Plugin 'fatih/vim-go'
 Plugin 'roktas/syntastic-more'
 
 " Improved statusline
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Snippets
 Plugin 'SirVer/ultisnips'

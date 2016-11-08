@@ -81,6 +81,15 @@ set title
 " understated in solarized dark (same as the grey in guibg).
 set colorcolumn=81
 hi ColorColumn ctermbg=DarkRed guibg=#592929
+" Allow paragraph formatting to use the 80th column
+set textwidth=80
+
+" Handle colorcolumn and textwidth for Go.
+au BufEnter *.go set colorcolumn=101
+au BufEnter *.go set textwidth=100
+au BufLeave *.go set textwidth=80
+au BufLeave *.go set colorcolumn=81
+
 " Change the directory for :o, :Ex, etc. to the current file's directory.
 au BufEnter * silent! lcd %:p:h
 " Remap escape to jk

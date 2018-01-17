@@ -39,6 +39,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+" Visual increment column for building columns of increasing numbers
+Plugin 'vim-scripts/VisIncr'
+
 " Use Valloric/YouCompleteMe for speedy autocompletions.
 if !s:at_google
   Plugin 'Valloric/YouCompleteMe'

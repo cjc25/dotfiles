@@ -61,7 +61,7 @@ layouts nScreens = onWorkspaces vimWorkspaces vimOrder $
 
 main = do
     nScreens <- countScreens
-    xmonad $ gnomeConfig
+    xmonad $ docks gnomeConfig
      { modMask = mod4Mask
      , handleEventHook = fullscreenEventHook
      , manageHook = myManageHook <+> manageHook gnomeConfig <+> fullscreenManageHook

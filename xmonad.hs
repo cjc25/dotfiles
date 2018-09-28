@@ -80,7 +80,7 @@ myKeys nScreens = [ (otherModMasks ++ "M-" ++ [key], windows $ action tag)
                   ]
 
 shortcutKeys = [ ( (mod1Mask .|. controlMask, xK_l)
-                 , safeSpawn "xscreensaver-command" ["-lock"]
+                 , safeSpawn "gnome-screensaver-command" ["--lock"]
                ) ]
 
 myManageHook = composeAll

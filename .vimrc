@@ -41,6 +41,8 @@ Plugin 'honza/vim-snippets'
 
 " Visual increment column for building columns of increasing numbers
 Plugin 'vim-scripts/VisIncr'
+" Sorting
+Plugin 'christoomey/vim-sort-motion'
 
 " Use Valloric/YouCompleteMe for speedy autocompletions.
 if !s:at_google

@@ -9,8 +9,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-sensible'
 
 " Improved C++ syntax highlighting
-Plugin 'vim-jp/cpp-vim'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'bfrg/vim-cpp-modern'
 
 " <leader>cc comments lines/regions. <leader>cu undoes comments.
 Plugin 'scrooloose/nerdcommenter'
@@ -21,15 +20,8 @@ Plugin 'scrooloose/syntastic'
 " <leader>be shows all loaded buffers in a selector window.
 Plugin 'bufexplorer.zip'
 
-" Paired actions with [ and ]. In general, caps are first/last, lowercase are
-" previous/next. Sometimes it's on/off, before/after, above/below. Lots of docs
-" are at :help unimpaired.
-Plugin 'tpope/vim-unimpaired'
-
 " Awesome golang support
 Plugin 'fatih/vim-go'
-" Syntastic Go appengine setup.
-Plugin 'roktas/syntastic-more'
 
 " Improved statusline
 Plugin 'vim-airline/vim-airline'
@@ -37,12 +29,9 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " Snippets
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 
-" Visual increment column for building columns of increasing numbers
-Plugin 'vim-scripts/VisIncr'
-" Sorting
-Plugin 'christoomey/vim-sort-motion'
+" TLA+ highlighting
+Plugin 'hwayne/tla.vim'
 
 " Use Valloric/YouCompleteMe for speedy autocompletions.
 if !s:at_google
@@ -57,6 +46,10 @@ colorscheme solarized
 if s:at_google
   source ~/google.vimrc
 endif
+
+" This slows down vim in diff mode, but can be useful on demand.
+let g:ycm_auto_hover = ""
+nmap <leader>D <plug>(YCMHover)
 
 " GENERAL SETTINGS
 " Embrace the darkness.
@@ -76,8 +69,6 @@ set hidden
 set hlsearch
 " Show line numbers.
 set number
-" Highlight matching parens, etc.
-set showmatch
 " Don't show INSERT/REPLACE/VISUAL since we have powerline.
 set showmode!
 " Change the window manager title.
@@ -88,12 +79,8 @@ set colorcolumn=81
 hi ColorColumn ctermbg=DarkRed guibg=#592929
 " Allow paragraph formatting to use the 80th column
 set textwidth=80
-
-" Handle colorcolumn and textwidth for Go.
-au BufEnter *.go set colorcolumn=101
-au BufEnter *.go set textwidth=100
-au BufLeave *.go set textwidth=80
-au BufLeave *.go set colorcolumn=81
+" When joining lines, don't use two spaces after a .
+set nojoinspaces
 
 " Change the directory for :o, :Ex, etc. to the current file's directory.
 au BufEnter * silent! lcd %:p:h

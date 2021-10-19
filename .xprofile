@@ -12,4 +12,8 @@ xscreensaver -no-splash &
 [ -f $HOME/.screenlayout/screenlayout.sh ] && \
   source $HOME/.screenlayout/screenlayout.sh
 
+# If present, set the background using feh
+[ -f $HOME/.fehbg ] && \
+  $HOME/.fehbg &
+
 exec $HOME/bin/xmonad

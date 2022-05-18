@@ -5,7 +5,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-sensible'
 
 " Improved C++ syntax highlighting
@@ -39,10 +38,6 @@ if !s:at_google
 endif
 call vundle#end()
 
-" Solarized dark is pretty, but better without italics
-let g:solarized_italic = 0
-colorscheme solarized
-
 if s:at_google
   source ~/google.vimrc
 endif
@@ -52,6 +47,13 @@ let g:ycm_auto_hover = ""
 nmap <leader>D <plug>(YCMHover)
 
 " GENERAL SETTINGS
+" If we have the selenized colorscheme, use it.
+try
+  set t_Co=16
+  colorscheme selenized
+catch
+  set t_Co&
+endtry
 " Embrace the darkness.
 set background=dark
 " Always set windows to the same size when they're split.
@@ -73,8 +75,7 @@ set number
 set showmode!
 " Change the window manager title.
 set title
-" Show a column at the 81st character. Note that DarkRed is actually quite
-" understated in solarized dark (same as the grey in guibg).
+" Show a column at the 81st character.
 set colorcolumn=81
 hi ColorColumn ctermbg=DarkRed guibg=#592929
 " Allow paragraph formatting to use the 80th column

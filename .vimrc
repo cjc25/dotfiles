@@ -49,10 +49,10 @@ nmap <leader>D <plug>(YCMHover)
 " GENERAL SETTINGS
 " If we have the selenized colorscheme, use it.
 try
-  set t_Co=16
+  set termguicolors
   colorscheme selenized
 catch
-  set t_Co&
+  set termguicolors&
 endtry
 " Embrace the darkness.
 set background=dark
@@ -85,6 +85,8 @@ set nojoinspaces
 
 " Change the directory for :o, :Ex, etc. to the current file's directory.
 au BufEnter * silent! lcd %:p:h
+" Use - as netrw parent dir
+nnoremap - :Ex<Return>
 " Remap escape to jk
 inoremap jk <Esc>
 

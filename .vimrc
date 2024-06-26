@@ -36,15 +36,28 @@ Plugin 'hwayne/tla.vim'
 if !s:at_google
   Plugin 'Valloric/YouCompleteMe'
 endif
+
+" Run commands conveniently in a tmux split
+Plugin 'preservim/vimux'
+
 call vundle#end()
 
 if s:at_google
   source ~/google.vimrc
 endif
 
+" Only use 10% of the screen for vimux - 20% is a lot
+let g:VimuxHeight = '10'
+" Don't use a nearby pane, always create a new one
+let g:VimuxUseNearest = 0
+" Close vimux pane on exit to avoid some silliness
+let g:VimuxCloseOnExit = 1
+
 " This slows down vim in diff mode, but can be useful on demand.
 let g:ycm_auto_hover = ""
-nmap <leader>D <plug>(YCMHover)
+nmap <leader>t <plug>(YCMHover)
+" goto definition and declaration convenience
+nnoremap gd :YcmCompleter GoTo<CR>
 
 " GENERAL SETTINGS
 " If we have the selenized colorscheme, use it.
@@ -89,6 +102,13 @@ au BufEnter * silent! lcd %:p:h
 nnoremap - :Ex<Return>
 " Remap escape to jk
 inoremap jk <Esc>
+
+" Vertical bar on entering insert mode
+let &t_SI = "\e[6 q"
+" Underline on entering replace mode
+let &t_SR = "\e[4 q"
+" Block on exiting insert or replace mode
+let &t_EI = "\e[2 q"
 
 " vim-airline setup
 " Use the smart tab line
